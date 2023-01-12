@@ -18,6 +18,10 @@
         "@babel/runtime": "^7.18.9",
         "@types/react-dom": "^18.0.6",
         "babel-loader": "^8.2.5",
+        "css-loader": "^6.2.0",
+        "node-sass": "^6.0.1",
+        "sass-loader": "^12.1.0",
+        "style-loader": "^3.2.1",
         "html-webpack-plugin": "^5.5.0",
         "webpack": "^5.74.0",
         "webpack-bundle-analyzer": "^4.5.0",
@@ -25,6 +29,7 @@
         "webpack-dev-server": "^4.9.3"
     },
     "scripts": {
-        "start": "webpack serve --config webpack.dev.config.js"
+        "start": "webpack serve --config webpack.dev.config.js",
+        "build": "webpack --config webpack.config.js"
     }
 }
