@@ -1,8 +1,0 @@
-{
-  "name": "dernoson",
-  "version": "1.0.0",
-  "main": "index.ts",
-  "repository": "https://github.com/dernoson/dernoson.git",
-  "author": "dernoson",
-  "license": "MIT"
-}
