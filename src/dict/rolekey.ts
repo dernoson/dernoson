@@ -1,3 +1,4 @@
+/**幹員 key name */
 export const rolekey = [
     ///////////////////////////////////////
     // 先鋒
@@ -155,7 +156,7 @@ export const rolekey = [
     'Nearl_the_radiant_knight',
     'Irene',
     'Gavial_the_invincible',
-    'Młynar',
+    'Mlynar', // TODO 瑪恩納暫譯
     'Franka',
     'Indra',
     'Lappland',

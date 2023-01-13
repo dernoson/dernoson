@@ -1,64 +1,62 @@
+import { ConstType } from '../utils';
 import { Info } from './common';
+import { RoleTypeKey } from './roletypeDef';
 
-/**先鋒模板 key name */
-export const VanguardModuleKey = ['pioneer', 'charger', 'bearer', 'tactician', 'agent'] as const;
-/**狙擊模板 key name */
-export const SniperModuleKey = ['marksman', 'artilleryman', 'heavyshooter', 'deadeye', 'besieger', 'flinger', 'spreadshooter'] as const;
-/**醫療模板 key name */
-export const MedicModuleKey = ['medic', 'multitarget', 'therapist', 'wandering', 'incantation'] as const;
-/**術師模板 key name */
-export const CasterModuleKey = ['core', 'splash', 'mystic', 'mechaccord', 'chain', 'blast', 'phalanx'] as const;
-/**近衛模板 key name */
-export const GuardModuleKey = [
-    'dreadnought',
-    'centurion',
-    'lord',
-    'artsfighter',
-    'fighter',
-    'swordmaster',
-    'musha',
-    'instructor',
-    'liberator',
-    'reaper',
-] as const;
-/**重裝模板 key name */
-export const DefenderModuleKey = ['protector', 'guardian', 'juggernaut', 'artsprotector', 'duelist', 'fortress'] as const;
-/**輔助模板 key name */
-export const SupporterModuleKey = ['decelbinder', 'bard', 'abjurer', 'hexer', 'summoner', 'artificer'] as const;
-/**特種模板 key name */
-export const SpecialistModuleKey = [
-    'pushstroker',
-    'hookmaster',
-    'executor',
-    'merchant',
-    'dollkeeper',
-    'ambusher',
-    'trapmaster',
-    'geek',
-] as const;
+/**模板 key name */
+export const moduleKey = ConstType<Record<RoleTypeKey, readonly string[]>>()({
+    vanguard: ['pioneer', 'charger', 'bearer', 'tactician', 'agent'],
+    sniper: ['marksman', 'artilleryman', 'heavyshooter', 'deadeye', 'besieger', 'flinger', 'spreadshooter'],
+    medic: ['medic', 'multitarget', 'therapist', 'wandering', 'incantation', 'chainheal'], // TODO 鍊癒師模板英譯
+    caster: ['core', 'splash', 'mystic', 'mechaccord', 'chain', 'blast', 'phalanx'],
+    guard: [
+        'dreadnought',
+        'centurion',
+        'lord',
+        'artsfighter',
+        'fighter',
+        'swordmaster',
+        'musha',
+        'instructor',
+        'liberator',
+        'reaper',
+        'heavysword', // TODO 重劍手模板英譯
+    ],
+    defender: ['protector', 'guardian', 'juggernaut', 'artsprotector', 'duelist', 'fortress', 'sentry'], // TODO 哨戒鐵衛英譯
+    supporter: ['decelbinder', 'bard', 'abjurer', 'hexer', 'summoner', 'artificer'],
+    specialist: ['pushstroker', 'hookmaster', 'executor', 'merchant', 'dollkeeper', 'ambusher', 'trapmaster', 'geek'],
+} as const);
+
+export type VanguardModuleKey = typeof moduleKey.vanguard[number];
+export type SniperModuleKey = typeof moduleKey.sniper[number];
+export type MedicModuleKey = typeof moduleKey.medic[number];
+export type CasterModuleKey = typeof moduleKey.caster[number];
+export type GuardModuleKey = typeof moduleKey.guard[number];
+export type DefenderModuleKey = typeof moduleKey.defender[number];
+export type SupporterModuleKey = typeof moduleKey.supporter[number];
+export type SpecialistModuleKey = typeof moduleKey.specialist[number];
 
 /**幹員職業模板 */
 export type RoleModuleKey =
-    | typeof VanguardModuleKey[number]
-    | typeof SniperModuleKey[number]
-    | typeof MedicModuleKey[number]
-    | typeof CasterModuleKey[number]
-    | typeof GuardModuleKey[number]
-    | typeof DefenderModuleKey[number]
-    | typeof SupporterModuleKey[number]
-    | typeof SpecialistModuleKey[number];
+    | VanguardModuleKey
+    | SniperModuleKey
+    | MedicModuleKey
+    | CasterModuleKey
+    | GuardModuleKey
+    | DefenderModuleKey
+    | SupporterModuleKey
+    | SpecialistModuleKey;
 
 /**先鋒模板資訊列表 */
-const VanguardModuleInfo: { [key in typeof VanguardModuleKey[number]]: Readonly<Info> } = Object.freeze({
+const VanguardModuleInfo: { [key in VanguardModuleKey]: Readonly<Info> } = Object.freeze({
     pioneer: { index: 1, word_tw: '尖兵' },
     charger: { index: 2, word_tw: '衝鋒手' },
     bearer: { index: 3, word_tw: '執旗手' },
     tactician: { index: 4, word_tw: '戰術家' },
-    agent: { index: 5, word_tw: '情報員' },
+    agent: { index: 5, word_tw: '情報官' },
 });
 
 /**狙擊模板資訊列表 */
-const SniperModuleInfo: { [key in typeof SniperModuleKey[number]]: Readonly<Info> } = Object.freeze({
+const SniperModuleInfo: { [key in SniperModuleKey]: Readonly<Info> } = Object.freeze({
     marksman: { index: 6, word_tw: '速射手' },
     artilleryman: { index: 7, word_tw: '炮手' },
     heavyshooter: { index: 8, word_tw: '重射手' },
@@ -69,16 +67,17 @@ const SniperModuleInfo: { [key in typeof SniperModuleKey[number]]: Readonly<Info
 });
 
 /**醫療模板資訊列表 */
-const MedicModuleInfo: { [key in typeof MedicModuleKey[number]]: Readonly<Info> } = Object.freeze({
+const MedicModuleInfo: { [key in MedicModuleKey]: Readonly<Info> } = Object.freeze({
     medic: { index: 13, word_tw: '醫師' },
     multitarget: { index: 14, word_tw: '群癒師' },
     therapist: { index: 15, word_tw: '療養師' },
     wandering: { index: 16, word_tw: '行醫' },
     incantation: { index: 17, word_tw: '咒癒師' },
+    chainheal: { index: 999, word_tw: '鍊癒師' },
 });
 
 /**術師模板資訊列表 */
-const CasterModuleInfo: { [key in typeof CasterModuleKey[number]]: Readonly<Info> } = Object.freeze({
+const CasterModuleInfo: { [key in CasterModuleKey]: Readonly<Info> } = Object.freeze({
     core: { index: 18, word_tw: '中堅術師' },
     splash: { index: 19, word_tw: '擴散術師' },
     mystic: { index: 20, word_tw: '秘術師' },
@@ -89,7 +88,7 @@ const CasterModuleInfo: { [key in typeof CasterModuleKey[number]]: Readonly<Info
 });
 
 /**近衛模板資訊列表 */
-const GuardModuleInfo: { [key in typeof GuardModuleKey[number]]: Readonly<Info> } = Object.freeze({
+const GuardModuleInfo: { [key in GuardModuleKey]: Readonly<Info> } = Object.freeze({
     dreadnought: { index: 25, word_tw: '無畏者' },
     centurion: { index: 26, word_tw: '強攻手' },
     lord: { index: 27, word_tw: '領主' },
@@ -100,20 +99,22 @@ const GuardModuleInfo: { [key in typeof GuardModuleKey[number]]: Readonly<Info> 
     instructor: { index: 32, word_tw: '教官' },
     liberator: { index: 33, word_tw: '解放者' },
     reaper: { index: 34, word_tw: '收割者' },
+    heavysword: { index: 999, word_tw: '重劍手' },
 });
 
 /**重裝模板資訊列表 */
-const DefenderModuleInfo: { [key in typeof DefenderModuleKey[number]]: Readonly<Info> } = Object.freeze({
+const DefenderModuleInfo: { [key in DefenderModuleKey]: Readonly<Info> } = Object.freeze({
     protector: { index: 35, word_tw: '鐵衛' },
     guardian: { index: 36, word_tw: '守護者' },
     juggernaut: { index: 37, word_tw: '不屈者' },
     artsprotector: { index: 38, word_tw: '馭法鐵衛' },
     duelist: { index: 39, word_tw: '決戰者' },
     fortress: { index: 40, word_tw: '要塞' },
+    sentry: { index: 999, word_tw: '哨戒鐵衛' },
 });
 
 /**輔助模板資訊列表 */
-const SupporterModuleInfo: { [key in typeof SupporterModuleKey[number]]: Readonly<Info> } = Object.freeze({
+const SupporterModuleInfo: { [key in SupporterModuleKey]: Readonly<Info> } = Object.freeze({
     decelbinder: { index: 41, word_tw: '凝滯師' },
     bard: { index: 42, word_tw: '吟遊者' },
     abjurer: { index: 43, word_tw: '護佑者' },
@@ -123,7 +124,7 @@ const SupporterModuleInfo: { [key in typeof SupporterModuleKey[number]]: Readonl
 });
 
 /**特種模板資訊列表 */
-const SpecialistModuleInfo: { [key in typeof SpecialistModuleKey[number]]: Readonly<Info> } = Object.freeze({
+const SpecialistModuleInfo: { [key in SpecialistModuleKey]: Readonly<Info> } = Object.freeze({
     pushstroker: { index: 47, word_tw: '推擊手' },
     hookmaster: { index: 48, word_tw: '鈎索師' },
     executor: { index: 49, word_tw: '處決者' },
