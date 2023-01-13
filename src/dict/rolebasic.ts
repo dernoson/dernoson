@@ -4,7 +4,7 @@ import {
     DefenderModuleKey,
     GuardModuleKey,
     MedicModuleKey,
-    RoleModuleKey,
+    ModuleKey,
     SniperModuleKey,
     SpecialistModuleKey,
     SupporterModuleKey,
@@ -18,10 +18,10 @@ export type RoleStar = 1 | 2 | 3 | 4 | 5 | 6;
 export type RoleBasicInfo = Readonly<{
     star: RoleStar;
     type: RoleTypeKey;
-    module: RoleModuleKey;
+    module: ModuleKey;
 }>;
 
-type SpecificRoleTypeBasicInfo<T extends RoleTypeKey, M extends RoleModuleKey> = Partial<
+type SpecificRoleTypeBasicInfo<T extends RoleTypeKey, M extends ModuleKey> = Partial<
     Record<RoleKey, Readonly<{ star: RoleStar; module: M; type: T }>>
 >;
 
@@ -313,6 +313,7 @@ const specialistBasicInfo = ConstType<SpecificRoleTypeBasicInfo<'specialist', Sp
     Thermalex: { star: 1, module: 'executor', type: 'specialist' },
 });
 
+/**幹員基本資訊 */
 export const roleBasicInfo: Readonly<Record<RoleKey, RoleBasicInfo>> = Object.freeze({
     ...vanguardBasicInfo,
     ...sniperBasicInfo,
